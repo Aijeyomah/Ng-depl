@@ -8,22 +8,27 @@ on: # rebuild any PRs and main branch changes
       - 'releases/*'
 
 jobs:
-  test: # make sure the action works on a clean machine without building
+  MeshMapScreenshot:
     runs-on: ubuntu-latest
+    outputs:
+      resource_url: ${{ steps.test_result.outputs.resource_url }}
     steps:
       - name: Set PR number # To comment the final status on the Pull-request opened in any repository
         run: |
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
-      - uses: actions/checkout@v3 #this step would go and would be no longer needed to be written
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 #this step would go away
         with:
           path: action
           repository: layer5labs/meshmap-snapshot
       - id: test_result
-        uses: layer5labs/MeshMap-Snapshot@v0.0.4
+        uses: layer5labs/MeshMap-Snapshot@v0.2.8
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }} # github's personal access token example: "ghp_...."
           mesheryToken: ${{ secrets.MESHERY_TOKEN }} # Meshery Cloud Authentication token, signin to meshery-cloud to get one, example: ey.....
           prNumber: ${{ env.PULL_NO }} # auto-filled from the above step
-          application_type: "Helm Chart" # your application type, could be any of three: "Kubernetes Manifest", "Docker Compose", "Helm Chart"
-          application_url: "https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz"
+          application_type: Kubernetes Manifest # your application type, could be any of three: "Kubernetes Manifest", "Docker Compose", "Helm Chart"
+          filePath: ${{ inputs.fileName == '' && 'install/deployment_yamls/k8s' || inputs.fileName }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
+
+ 
