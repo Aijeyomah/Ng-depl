@@ -45,3 +45,5 @@ jobs:
           prNumber: ${{ env.PULL_NO }}
           application_type: Kubernetes Manifest
           filePath: ${{ inputs.fileName == '' && 'ngnix-depl.yaml' || inputs.fileName }}
+
+          
