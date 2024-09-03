@@ -27,5 +27,5 @@ jobs:
           prNumber: ${{ env.PULL_NO }} # auto-filled from the above step
           application_type: "Helm Chart" # your application type, could be any of three: "Kubernetes Manifest", "Docker Compose", "Helm Chart"
           application_url: "https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz"
-          designId" : "58cc1336"
+          designId": "1b8f47e5-89d4-433f-bcd2-942c1f5d62bc"
           filePath": "https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz"
