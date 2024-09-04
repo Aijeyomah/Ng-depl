@@ -19,6 +19,10 @@ name: MeshMap Screenshot Service
         description: The pull request number
         required: true
         type: string
+      assetLocation:
+        description: The location of the snapshot url
+        required: true
+        type: string
 
   pull_request_target:
     types:
@@ -68,3 +72,4 @@ jobs:
           prNumber: ${{ inputs.prNumber }}
           application_type: ${{ inputs.application_type }}
           application_url: ${{ inputs.application_url }}
+          assetLocation: ${{ inputs.assetLocation }}
