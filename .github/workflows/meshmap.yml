@@ -43,6 +43,6 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
           prNumber: ${{ env.PULL_NO }}
-          application_type: Kubernetes Manifest
-          filePath: ${{ inputs.fileName == '' && 'ngnix-depl.yaml' || inputs.fileName }}
+          application_type: "Helm Chart" # your application type, could be any of three: "Kubernetes Manifest", "Docker Compose", "Helm Chart"
+          application_url: "https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz"
 
