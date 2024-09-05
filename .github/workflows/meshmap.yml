@@ -15,13 +15,12 @@ name: MeshMap Screenshot Service
         description: The URL of the Helm chart or application
         required: true
         type: string
-    #   prNumber:
-    #     description: The pull request number
-    #     required: true
-    #     type: string
+      designID:
+        description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
+        required: false
       assetLocation:
         description: The location of the snapshot url
-        required: true
+        required: false
         type: string
 
   pull_request_target:
