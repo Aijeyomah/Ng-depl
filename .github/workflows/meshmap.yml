@@ -13,7 +13,7 @@ name: MeshMap Screenshot Service
         type: string
       application_url:
         description: The URL of the Helm chart or application
-        required: true
+        required: false
         type: string
       designID:
         description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
