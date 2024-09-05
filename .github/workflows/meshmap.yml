@@ -15,10 +15,10 @@ name: MeshMap Screenshot Service
         description: The URL of the Helm chart or application
         required: true
         type: string
-      prNumber:
-        description: The pull request number
-        required: true
-        type: string
+    #   prNumber:
+    #     description: The pull request number
+    #     required: true
+    #     type: string
       assetLocation:
         description: The location of the snapshot url
         required: true
@@ -69,7 +69,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
-          prNumber: ${{ inputs.prNumber }}
+        #   prNumber: ${{ inputs.prNumber }}
           application_type: ${{ inputs.application_type }}
           application_url: ${{ inputs.application_url }}
           assetLocation: ${{ inputs.assetLocation }}
