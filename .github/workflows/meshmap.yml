@@ -7,6 +7,7 @@ name: MeshMap Screenshot Service
         description: Relative file path from the root directory
         required: false
         type: string
+    
       application_type:
         description: Type of the application (e.g., Helm Chart, Kubernetes Manifest, Docker Compose)
         required: true
@@ -72,3 +73,4 @@ jobs:
           application_type: ${{ inputs.application_type }}
           application_url: ${{ inputs.application_url }}
           assetLocation: ${{ inputs.assetLocation }}
+          designID: ${{ inputs.designID }}
