@@ -23,6 +23,10 @@ name: MeshMap Screenshot Service
         description: The location of the snapshot url
         required: false
         type: string
+      email:
+        description: email
+        required: false
+        type: string
 
   pull_request_target:
     types:
@@ -73,4 +77,5 @@ jobs:
           application_type: ${{ inputs.application_type }}
           application_url: ${{ inputs.application_url }}
           assetLocation: ${{ inputs.assetLocation }}
-          designID: ${{ inputs.designID }}
+          designID: ${{ inputs.designID }} 
+          email: ${{ inputs.email }}
