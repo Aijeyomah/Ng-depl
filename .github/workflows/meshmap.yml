@@ -4,7 +4,7 @@ name: MeshMap Screenshot Service
   workflow_dispatch:
     inputs:
       fileName:
-        description: Relative file path from the root directory
+        description: Relative file path from the root directory.
         required: false
         type: string
     
@@ -81,4 +81,3 @@ jobs:
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
           email: ${{ inputs.email }}
-          
