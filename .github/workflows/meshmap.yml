@@ -78,5 +78,4 @@ jobs:
           application_url: ${{ inputs.application_url }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
-          email: ${{ inputs.email }}
           
