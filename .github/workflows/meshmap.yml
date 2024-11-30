@@ -10,7 +10,7 @@ name: MeshMap Screenshot Service
       fileName:
         description: Relative file path from the root directory
         required: true
-        type: string
+        type: string 
     outputs:
       resource_url:
         description: The URL of the generated resource.
