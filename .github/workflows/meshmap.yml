@@ -1,20 +1,48 @@
-name: MeshMap Screenshot Service
 'on':
+  workflow_dispatch:
+    inputs:
+      fileName:
+        description: Relative file path from the root directory
+        required: false
+        type: string
+    
+      application_type:
+        description: Type of the application (e.g., Helm Chart, Kubernetes Manifest, Docker Compose)
+        required: true
+        type: string
+      application_url:
+        description: The URL of the Helm chart or application
+        required: false
+        type: string
+      designID:
+        description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
+        required: false
+      assetLocation:
+        description: The location of the snapshot url
+        required: false
+        type: string
+      email:
+        description: email
+        required: false
+        type: string
+
   pull_request_target:
     types:
       - opened
       - synchronize
       - reopened
+
   workflow_call:
     inputs:
       fileName:
         description: Relative file path from the root directory
         required: true
-        type: string 
+        type: string
     outputs:
       resource_url:
         description: The URL of the generated resource.
         value: ${{ jobs.MeshMapScreenshot.outputs.resource_url }}
+
 permissions:
   actions: read
   contents: write
@@ -22,6 +50,7 @@ permissions:
   statuses: write
   pull-requests: write
   id-token: write
+
 jobs:
   MeshMapScreenshot:
     runs-on: ubuntu-latest
@@ -30,18 +59,24 @@ jobs:
     steps:
       - name: Set PR number
         run: |
+          echo ""
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
+          echo "MESHERY_TOKEN=${{ secrets.MESHERY_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           path: action
           repository: layer5labs/meshmap-snapshot
       - id: test_result
-        uses: ${GITHUB_REF/refs/tags//}
+        uses: layer5labs/MeshMap-Snapshot@v0.2.8
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
-          prNumber: ${{ env.PULL_NO }}
-          application_type: Kubernetes Manifest
-          filePath: ${{ inputs.fileName == '' && 'ngnix-depl.yaml' || inputs.fileName }}
+        #   prNumber: ${{ inputs.prNumber }}
+          application_type: ${{ inputs.application_type }}
+          application_url: ${{ inputs.application_url }}
+          assetLocation: ${{ inputs.assetLocation }}
+          designID: ${{ inputs.designID }} 
+          email: ${{ inputs.email }}
+          
