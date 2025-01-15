@@ -5,8 +5,8 @@ name: Kanvas Screenshot Service
       - opened
       - synchronize
       - reopened
-  workflow_dispatch:
   workflow_call:
+  workflow_dispatch:
     inputs:
       application_type:
         description: Type of the application (e.g., Helm Chart, Kubernetes Manifest, Docker Compose)
