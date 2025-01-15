@@ -43,6 +43,7 @@ jobs:
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
           if [ "$pull_number" = "null" ]; then
             echo "PULL_NO=${{ inputs.prNumber }}" >> $GITHUB_ENV
+          fi
           echo "MESHERY_TOKEN=${{ secrets.MESHERY_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
