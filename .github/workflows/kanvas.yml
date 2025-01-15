@@ -32,6 +32,7 @@ jobs:
         run: |
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
+          echo "PULL_NO=$secrets.GITHUB_TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
