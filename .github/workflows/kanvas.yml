@@ -52,7 +52,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
-          prNumber: ${{ env.PULL_NO || inputs.prNumber }}
+          prNumber: ${{ inputs.prNumber }}
           application_type: ${{ inputs.application_type }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
