@@ -10,14 +10,12 @@ name: Kanvas Screenshot Service
     inputs:
       application_type:
         description: Type of the application (e.g., Helm Chart, Kubernetes Manifest, Docker Compose)
-        required: false
         type: string
       designID:
         description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
-        required: false
+        type: string
       assetLocation:
         description: The location of the snapshot url
-        required: false
         type: string
     outputs:
       resource_url:
