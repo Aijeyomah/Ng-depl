@@ -20,6 +20,10 @@ name: Kanvas Screenshot Service
       skipComment:
         description: Skip comment
         type: boolean
+      prNumber:
+        description: PR number
+        type: string
+        default: "0"
 permissions:
   actions: read
   contents: write
@@ -48,7 +52,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
-          prNumber: ${{ env.PULL_NO }}
+          prNumber: ${{ env.PULL_NO || inputs.prNumber }}
           application_type: ${{ inputs.application_type }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
