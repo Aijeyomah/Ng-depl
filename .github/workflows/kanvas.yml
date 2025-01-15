@@ -41,6 +41,8 @@ jobs:
         run: |
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
+          if [ "$pull_number" = "null" ]; then
+            echo "PULL_NO=${{nputs.prNumber }}" >> $GITHUB_ENV
           echo "MESHERY_TOKEN=${{ secrets.MESHERY_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -52,7 +54,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
-          prNumber: ${{ inputs.prNumber }}
+          prNumber: ${{ env.PULL_NO }}
           application_type: ${{ inputs.application_type }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
