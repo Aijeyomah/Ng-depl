@@ -35,14 +35,7 @@ jobs:
     steps:
       - name: Set PR number
         run: |
-          echo "Fetching PR for branch: ${{ inputs.branch }}"
-          response=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.repository_owner }}:${{ inputs.branch }}")
-          pull_number=$(echo "$response" | jq -r '.[0].number')
-          if [ "$pull_number" = "null" ]; then
-            echo "No PR found for branch: ${{ inputs.branch }}"
-            exit 1
-          fi
+          export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
           echo "MESHERY_TOKEN=${{ secrets.MESHERY_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
