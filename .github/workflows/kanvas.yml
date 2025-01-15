@@ -17,10 +17,6 @@ name: Kanvas Screenshot Service
       assetLocation:
         description: The location of the snapshot url
         type: string
-    outputs:
-      resource_url:
-        description: The URL of the generated resource.
-        value: ${{ jobs.KanvasScreenshot.outputs.resource_url }}
 permissions:
   actions: read
   contents: write
