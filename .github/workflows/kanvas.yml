@@ -17,6 +17,9 @@ name: Kanvas Screenshot Service
       assetLocation:
         description: The location of the snapshot url
         type: string
+      skipComment:
+        description: Skip comment
+        type: boolean
 permissions:
   actions: read
   contents: write
