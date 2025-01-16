@@ -60,7 +60,7 @@ jobs:
           application_type: "Helm Chart"
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
-          application_url: 'https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz'
+          application_url: 'https://meshery.github.io/meshery.io/charts/meshery-v0.7.109.tgz'
 
 
 
