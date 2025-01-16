@@ -57,7 +57,7 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
           prNumber: ${{ env.PULL_NO }}
-          application_type: "Helm Chart"
+          application_type: ${{ inputs.application_type | default('Helm Chart') }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
           application_url: 'https://meshery.github.io/meshery.io/charts/meshery-v0.7.109.tgz'
