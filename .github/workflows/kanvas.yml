@@ -60,7 +60,7 @@ jobs:
           application_type: ${{ inputs.application_type }}
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
-          application_url: 'https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz'
+          filePath: 'https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz'
 
 
 
