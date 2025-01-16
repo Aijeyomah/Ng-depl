@@ -57,7 +57,7 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
           prNumber: ${{ env.PULL_NO }}
-          application_type: ${{ inputs.application_type }}
+          application_type: "Helm Chart"
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
           application_url: 'https://charts.bitnami.com/bitnami/nginx-13.2.33.tgz'
