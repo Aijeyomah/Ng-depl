@@ -52,7 +52,7 @@ jobs:
           path: action
           repository: layer5labs/kanvas-snapshot
       - id: test_result
-        uses: layer5labs/kanvas-snapshot@v0.2.25
+        uses: layer5labs/kanvas-snapshot@v0.2.33
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
@@ -61,6 +61,7 @@ jobs:
           assetLocation: ${{ inputs.assetLocation }}
           designID: ${{ inputs.designID }} 
           application_url: ${{ env.PULL_NO != '0' && 'https://meshery.github.io/meshery.io/charts/meshery-v0.7.109.tgz' }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
+          email: "ijayeti@gmail.com"
 
 
 
