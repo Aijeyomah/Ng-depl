@@ -6,15 +6,29 @@ name: Kanvas Screenshot Service
       - synchronize
       - reopened
   workflow_call:
+  workflow_dispatch:
     inputs:
-      fileName:
-        description: Relative file path from the root directory
-        required: true
+      application_type:
+        description: Type of the application (e.g., Helm Chart, Kubernetes Manifest, Docker Compose)
         type: string
-    outputs:
-      resource_url:
-        description: The URL of the generated resource.
-        value: ${{ jobs.KanvasScreenshot.outputs.resource_url }}
+        default: "Helm Chart"
+      designID:
+        description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
+        type: string
+      assetLocation:
+        description: The location of the snapshot url
+        type: string
+      skipComment:
+        description: Skip comment
+        type: boolean
+      prNumber:
+        description: PR number
+        type: string
+        default: "0"
+      email:
+        required: false
+        type: string
+        description: Optional email address to receive the snapshot.
 permissions:
   actions: read
   contents: write
@@ -32,16 +46,27 @@ jobs:
         run: |
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo "PULL_NO=$pull_number" >> $GITHUB_ENV
+          if [ "$pull_number" = "null" ]; then
+            echo "PULL_NO=${{ inputs.prNumber }}" >> $GITHUB_ENV
+          fi
+          echo "MESHERY_TOKEN=${{ secrets.MESHERY_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           path: action
           repository: layer5labs/kanvas-snapshot
       - id: test_result
-        uses: layer5labs/kanvas-snapshot@v0.2.18
+        uses: layer5labs/kanvas-snapshot@v0.2.34
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           mesheryToken: ${{ secrets.MESHERY_TOKEN }}
           prNumber: ${{ env.PULL_NO }}
-          application_type: Kubernetes Manifest
-          filePath: ${{ inputs.fileName == '' && 'ngnix-depl.yaml' || inputs.fileName }}
+          application_type: ${{ inputs.application_type || 'Helm Chart' }}
+          assetLocation: ${{ inputs.assetLocation }}
+          designID: ${{ inputs.designID }} 
+          application_url: ${{ env.PULL_NO != '0' && 'https://meshery.github.io/meshery.io/charts/meshery-v0.7.109.tgz' }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
+          email: ${{ inputs.email }}
+
+
+
+

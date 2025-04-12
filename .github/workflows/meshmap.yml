@@ -1,5 +1,12 @@
+name: MeshMap Screenshot Service
 'on':
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
   workflow_dispatch:
+  workflow_call:
     inputs:
       fileName:
         description: Relative file path from the root directory
